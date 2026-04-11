@@ -1,0 +1,17 @@
+{
+  "name": "Calibots 2 Home Studio",
+  "short_name": "Calibots 2",
+  "description": "A responsive English study app for Kinder based on Calibots 2 themes and vocabulary.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef3fb",
+  "theme_color": "#6d5efc",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
