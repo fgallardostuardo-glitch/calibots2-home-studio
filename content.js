@@ -1,0 +1,151 @@
+window.CALIBOTS_CONTENT = {
+  title: 'Calibots 2 Home Studio',
+  subtitle: 'Playful English study app for Kinder',
+  tips: [
+    'Use it for 8 to 12 minutes only.',
+    'Sit with the child and repeat the words together.',
+    'Celebrate attempts first, then correct gently.',
+    'Switch units often so the child stays curious.'
+  ],
+  badges: ['Color Hero', 'Numbers Rocket', 'Shape Master', 'Animal Explorer', 'Object Expert', 'Listening Star', 'Vehicle Rider', 'Body Expert'],
+  modes: [
+    ['explore', '🧭', 'Explorer', 'Large cards, calmer rhythm, repeat after me.'],
+    ['listen', '🎧', 'Listen & Tap', 'Hear first, then choose among four options.'],
+    ['match', '🧩', 'Sound Match', 'Listen to a word and match it to the right picture.']
+  ],
+  units: [
+    {
+      id: 'u1',
+      title: 'Get Ready!',
+      theme: 'Colors, numbers 1 to 10, shapes and size',
+      accent: '#6d5efc',
+      gradient: 'linear-gradient(135deg,#d8b4fe 0%,#fde68a 50%,#93c5fd 100%)',
+      description: 'Warm-up unit for first English recognition and oral practice.',
+      prompts: ['What is it?', 'Which color is it?', 'Is it big or small?'],
+      items: [
+        ['red','Red','Rojo','color','#ef4444','Colors'],
+        ['green','Green','Verde','color','#22c55e','Colors'],
+        ['yellow','Yellow','Amarillo','color','#facc15','Colors'],
+        ['blue','Blue','Azul','color','#3b82f6','Colors'],
+        ['orange','Orange','Naranjo','color','#fb923c','Colors'],
+        ['purple','Purple','Morado','color','#8b5cf6','Colors'],
+        ['pink','Pink','Rosado','color','#ec4899','Colors'],
+        ['one','One','Uno','number','1','Numbers'],
+        ['two','Two','Dos','number','2','Numbers'],
+        ['three','Three','Tres','number','3','Numbers'],
+        ['four','Four','Cuatro','number','4','Numbers'],
+        ['five','Five','Cinco','number','5','Numbers'],
+        ['six','Six','Seis','number','6','Numbers'],
+        ['seven','Seven','Siete','number','7','Numbers'],
+        ['eight','Eight','Ocho','number','8','Numbers'],
+        ['nine','Nine','Nueve','number','9','Numbers'],
+        ['ten','Ten','Diez','number','10','Numbers'],
+        ['triangle','Triangle','Triángulo','shape','triangle','Shapes'],
+        ['square','Square','Cuadrado','shape','square','Shapes'],
+        ['circle','Circle','Círculo','shape','circle','Shapes'],
+        ['small','Small','Pequeño','size','small','Opposites'],
+        ['big','Big','Grande','size','big','Opposites']
+      ]
+    },
+    {
+      id: 'u2',
+      title: 'Objects',
+      theme: 'School and everyday objects',
+      accent: '#10b981',
+      gradient: 'linear-gradient(135deg,#a7f3d0,#d9f99d,#fef3c7)',
+      description: 'Useful object names for school and home, with clearer drawings.',
+      prompts: ['Touch the pencil.', 'Where is the window?', 'Show me the computer.'],
+      items: [
+        ['eraser','Eraser','Goma','icon','eraser','Objects'],
+        ['pencil','Pencil','Lápiz','icon','pencil','Objects'],
+        ['book','Book','Libro','icon','book','Objects'],
+        ['glue','Glue','Pegamento','icon','glue','Objects'],
+        ['scissors','Scissors','Tijeras','icon','scissors','Objects'],
+        ['backpack','Backpack','Mochila','icon','backpack','Objects'],
+        ['chair','Chair','Silla','icon','chair','Objects'],
+        ['table','Table','Mesa','icon','table','Objects'],
+        ['desk','Desk','Escritorio','icon','desk','Objects'],
+        ['ruler','Ruler','Regla','icon','ruler','Objects'],
+        ['ball','Ball','Pelota','icon','ball','Objects'],
+        ['lamp','Lamp','Lámpara','icon','lamp','Objects'],
+        ['cup','Cup','Taza','icon','cup','Objects'],
+        ['board','Board','Pizarra','icon','board','Objects'],
+        ['door','Door','Puerta','icon','door','Objects'],
+        ['window','Window','Ventana','icon','window','Objects'],
+        ['clock','Clock','Reloj','icon','clock','Objects'],
+        ['computer','Computer','Computador','icon','computer','Objects'],
+        ['bottle','Bottle','Botella','icon','bottle','Objects']
+      ]
+    },
+    {
+      id: 'u3',
+      title: 'Animals',
+      theme: 'Animal names',
+      accent: '#14b8a6',
+      gradient: 'linear-gradient(135deg,#99f6e4,#a7f3d0,#dcfce7)',
+      description: 'Animal vocabulary for quick listening games.',
+      prompts: ['Find the lion.', 'Show me the dolphin.', 'Where is the zebra?'],
+      items: [
+        ['giraffe','Giraffe','Jirafa','emoji','🦒','Animals'],
+        ['hippo','Hippo','Hipopótamo','emoji','🦛','Animals'],
+        ['monkey','Monkey','Mono','emoji','🐒','Animals'],
+        ['snake','Snake','Serpiente','emoji','🐍','Animals'],
+        ['lion','Lion','León','emoji','🦁','Animals'],
+        ['elephant','Elephant','Elefante','emoji','🐘','Animals'],
+        ['zebra','Zebra','Cebra','emoji','🦓','Animals'],
+        ['bear','Bear','Oso','emoji','🐻','Animals'],
+        ['tiger','Tiger','Tigre','emoji','🐯','Animals'],
+        ['dog','Dog','Perro','emoji','🐶','Animals'],
+        ['cat','Cat','Gato','emoji','🐱','Animals'],
+        ['bird','Bird','Pájaro','emoji','🐦','Animals'],
+        ['fish','Fish','Pez','emoji','🐟','Animals'],
+        ['rabbit','Rabbit','Conejo','emoji','🐰','Animals'],
+        ['whale','Whale','Ballena','emoji','🐋','Animals'],
+        ['gorilla','Gorilla','Gorila','emoji','🦍','Animals'],
+        ['mouse','Mouse','Ratón','emoji','🐭','Animals'],
+        ['dolphin','Dolphin','Delfín','emoji','🐬','Animals']
+      ]
+    },
+    {
+      id: 'u4',
+      title: 'My Body',
+      theme: 'Clear body parts',
+      accent: '#ef4444',
+      gradient: 'linear-gradient(135deg,#fecaca,#fda4af,#fde68a)',
+      description: 'Clear body-part drawings with the exact part highlighted.',
+      prompts: ['Touch your nose.', 'Show me the arm.', 'Where is the mouth?'],
+      items: [
+        ['head','Head','Cabeza','body','head','Body'],
+        ['arm','Arm','Brazo','body','arm','Body'],
+        ['hand','Hand','Mano','body','hand','Body'],
+        ['torso','Torso','Torso','body','torso','Body'],
+        ['leg','Leg','Pierna','body','leg','Body'],
+        ['foot','Foot','Pie','body','foot','Body'],
+        ['eyes','Eyes','Ojos','body','eyes','Body'],
+        ['mouth','Mouth','Boca','body','mouth','Body'],
+        ['ear','Ear','Oreja','body','ear','Body'],
+        ['nose','Nose','Nariz','body','nose','Body'],
+        ['hair','Hair','Pelo','body','hair','Body']
+      ]
+    },
+    {
+      id: 'u5',
+      title: 'Vehicles',
+      theme: 'Transport and movement',
+      accent: '#0ea5e9',
+      gradient: 'linear-gradient(135deg,#93c5fd,#bfdbfe,#dbeafe)',
+      description: 'Vehicle names for travel and movement.',
+      prompts: ['Find the bus.', 'Show me the train.', 'Where is the airplane?'],
+      items: [
+        ['car','Car','Auto','emoji','🚗','Vehicles'],
+        ['bus','Bus','Bus','emoji','🚌','Vehicles'],
+        ['train','Train','Tren','emoji','🚆','Vehicles'],
+        ['airplane','Airplane','Avión','emoji','✈️','Vehicles'],
+        ['helicopter','Helicopter','Helicóptero','emoji','🚁','Vehicles'],
+        ['boat','Boat','Bote','emoji','⛵','Vehicles'],
+        ['bike','Bike','Bicicleta','emoji','🚲','Vehicles'],
+        ['motorcycle','Motorcycle','Moto','emoji','🏍️','Vehicles']
+      ]
+    }
+  ]
+};

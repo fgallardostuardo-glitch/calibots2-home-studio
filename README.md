@@ -1,34 +1,26 @@
-# Calibots 2 Home Studio
+# Calibots 2 Home Studio - Fixed Review Build
 
-Interactive English study app for a 5-year-old child, inspired by the public themes of Calibots 2.
+This version was rebuilt to solve the main practical issues from the previous ZIP:
 
-## What is included
-- desktop-like interface on large screens
-- touch-friendly layout for Android phones and tablets
-- pre-reader and reader-support modes
-- audio-first activities
-- units based on Calibots 2 public themes
-- numbers reinforced from 1 to 10
-- local progress saving
-- installable web app metadata
+- no auto-greeting speaking too fast on the home screen
+- safer behavior when opened locally from an extracted folder
+- clearer, separated files instead of one oversized HTML blob
+- real unit selection for the study plan
+- improved Listen mode: target image is hidden, so the child must listen
+- improved Sound Match mode: hear a word first, then choose the picture
+- added animals and objects vocabulary
+- more attractive reward feedback with star bursts and badges
 
-## Main files
-- `index.html` → full self-contained app
-- `manifest.webmanifest` → installable web app metadata
-- `sw.js` → offline caching
-- `assets/favicon.svg` → app icon
-- `.nojekyll` → GitHub Pages compatibility
+## Files
+- `index.html`
+- `styles.css`
+- `content.js`
+- `app.js`
+- `manifest.webmanifest`
+- `sw.js`
+- `assets/favicon.svg`
 
-## Publish on GitHub Pages
-1. Open the repository settings.
-2. Go to **Pages**.
-3. In **Build and deployment**, choose **Deploy from a branch**.
-4. Select **main** and **/(root)**.
-5. Save.
+## Usage
+You can open `index.html` after extracting the ZIP.
 
-The expected public URL will be:
-
-`https://fgallardostuardo-glitch.github.io/calibots2-home-studio/`
-
-## Notes
-This version is designed to be practical, stable and easy to publish. It does not reproduce copyrighted official page art or proprietary audio from the book.
+For install/offline behavior, serve the folder through a local or web server.
