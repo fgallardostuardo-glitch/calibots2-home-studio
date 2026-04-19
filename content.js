@@ -86,24 +86,24 @@ window.CALIBOTS_CONTENT = {
       description: 'Animal vocabulary for quick listening games.',
       prompts: ['Find the lion.', 'Show me the dolphin.', 'Where is the zebra?'],
       items: [
-        ['giraffe','Giraffe','Jirafa','emoji','🦒','Animals'],
-        ['hippo','Hippo','Hipopótamo','emoji','🦛','Animals'],
-        ['monkey','Monkey','Mono','emoji','🐒','Animals'],
-        ['snake','Snake','Serpiente','emoji','🐍','Animals'],
-        ['lion','Lion','León','emoji','🦁','Animals'],
-        ['elephant','Elephant','Elefante','emoji','🐘','Animals'],
-        ['zebra','Zebra','Cebra','emoji','🦓','Animals'],
-        ['bear','Bear','Oso','emoji','🐻','Animals'],
-        ['tiger','Tiger','Tigre','emoji','🐯','Animals'],
-        ['dog','Dog','Perro','emoji','🐶','Animals'],
-        ['cat','Cat','Gato','emoji','🐱','Animals'],
-        ['bird','Bird','Pájaro','emoji','🐦','Animals'],
-        ['fish','Fish','Pez','emoji','🐟','Animals'],
-        ['rabbit','Rabbit','Conejo','emoji','🐰','Animals'],
-        ['whale','Whale','Ballena','emoji','🐋','Animals'],
-        ['gorilla','Gorilla','Gorila','emoji','🦍','Animals'],
-        ['mouse','Mouse','Ratón','emoji','🐭','Animals'],
-        ['dolphin','Dolphin','Delfín','emoji','🐬','Animals']
+        ['giraffe','Giraffe','Jirafa','animal','giraffe','Animals'],
+        ['hippo','Hippo','Hipopótamo','animal','hippo','Animals'],
+        ['monkey','Monkey','Mono','animal','monkey','Animals'],
+        ['snake','Snake','Serpiente','animal','snake','Animals'],
+        ['lion','Lion','León','animal','lion','Animals'],
+        ['elephant','Elephant','Elefante','animal','elephant','Animals'],
+        ['zebra','Zebra','Cebra','animal','zebra','Animals'],
+        ['bear','Bear','Oso','animal','bear','Animals'],
+        ['tiger','Tiger','Tigre','animal','tiger','Animals'],
+        ['dog','Dog','Perro','animal','dog','Animals'],
+        ['cat','Cat','Gato','animal','cat','Animals'],
+        ['bird','Bird','Pájaro','animal','bird','Animals'],
+        ['fish','Fish','Pez','animal','fish','Animals'],
+        ['rabbit','Rabbit','Conejo','animal','rabbit','Animals'],
+        ['whale','Whale','Ballena','animal','whale','Animals'],
+        ['gorilla','Gorilla','Gorila','animal','gorilla','Animals'],
+        ['mouse','Mouse','Ratón','animal','mouse','Animals'],
+        ['dolphin','Dolphin','Delfín','animal','dolphin','Animals']
       ]
     },
     {
@@ -137,14 +137,14 @@ window.CALIBOTS_CONTENT = {
       description: 'Vehicle names for travel and movement.',
       prompts: ['Find the bus.', 'Show me the train.', 'Where is the airplane?'],
       items: [
-        ['car','Car','Auto','emoji','🚗','Vehicles'],
-        ['bus','Bus','Bus','emoji','🚌','Vehicles'],
-        ['train','Train','Tren','emoji','🚆','Vehicles'],
-        ['airplane','Airplane','Avión','emoji','✈️','Vehicles'],
-        ['helicopter','Helicopter','Helicóptero','emoji','🚁','Vehicles'],
-        ['boat','Boat','Bote','emoji','⛵','Vehicles'],
-        ['bike','Bike','Bicicleta','emoji','🚲','Vehicles'],
-        ['motorcycle','Motorcycle','Moto','emoji','🏍️','Vehicles']
+        ['car','Car','Auto','vehicle','car','Vehicles'],
+        ['bus','Bus','Bus','vehicle','bus','Vehicles'],
+        ['train','Train','Tren','vehicle','train','Vehicles'],
+        ['airplane','Airplane','Avión','vehicle','airplane','Vehicles'],
+        ['helicopter','Helicopter','Helicóptero','vehicle','helicopter','Vehicles'],
+        ['boat','Boat','Bote','vehicle','boat','Vehicles'],
+        ['bike','Bike','Bicicleta','vehicle','bike','Vehicles'],
+        ['motorcycle','Motorcycle','Moto','vehicle','motorcycle','Vehicles']
       ]
     }
   ]

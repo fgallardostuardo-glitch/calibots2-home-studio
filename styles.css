@@ -225,10 +225,10 @@ button { border: 0; cursor: pointer; }
 .emoji { font-size: clamp(58px, 10vw, 110px); }
 
 .svg-box { background: linear-gradient(180deg,#fff,#f8fbff); }
-.icon-svg { width: 86%; height: 86%; }
-.body-box .icon-svg { width: 92%; height: 92%; }
+.icon-svg { width: 94%; height: 94%; }
+.body-box .icon-svg { width: 98%; height: 98%; }
 .body-svg { filter: drop-shadow(0 6px 10px rgba(35,56,98,.08)); }
-.visual.small .icon-svg { width: 82%; height: 82%; }
+.visual.small .icon-svg { width: 88%; height: 88%; }
 .shape-wrap { width: 72%; height: 72%; display: grid; place-items: center; }
 .shape-circle { width: 78%; height: 78%; border-radius: 50%; background: #facc15; }
 .shape-square { width: 78%; height: 78%; border-radius: 18px; background: #ef4444; }
@@ -302,3 +302,12 @@ button { border: 0; cursor: pointer; }
   .listener-stage .ear { width: 112px; height: 112px; font-size: 64px; }
   .choice-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
+
+/* Premium illustration polish */
+.visual{background:linear-gradient(180deg,#ffffff,#fbfcff);border:1px solid rgba(219,229,242,.9)}
+.visual.small{background:linear-gradient(180deg,#ffffff,#fbfcff)}
+.icon-svg{overflow:visible}
+.svg-box{background:linear-gradient(180deg,#fff,#fafcff)}
+.choice:hover,.match-card:hover,.mode-card:hover,.study-card:hover,.unit-button:hover{transform:translateY(-2px)}
+.choice,.match-card,.mode-card,.study-card,.unit-button{transition:transform .16s ease, box-shadow .16s ease}
+.audio-pill{background:linear-gradient(180deg,#eef2ff,#e0e7ff)}
