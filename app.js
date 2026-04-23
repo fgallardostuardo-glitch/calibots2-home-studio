@@ -738,11 +738,22 @@
       const px = item.value === 'big' ? (small ? 90 : 150) : (small ? 54 : 86);
       return `<div class="${cls}"><div class="size-dot" style="width:${px}px;height:${px}px"></div></div>`;
     }
+    if (shouldUseRasterAsset(item)) {
+      return `<div class="${cls} asset-box"><img class="asset-img" src="${assetPath(item)}" alt="${escapeAttr(item.label)}" loading="lazy" /></div>`;
+    }
     if (item.kind === 'icon') return `<div class="${cls} svg-box">${objectSVG(item.value)}</div>`;
     if (item.kind === 'animal') return `<div class="${cls} svg-box">${animalSVG(item.value)}</div>`;
     if (item.kind === 'vehicle') return `<div class="${cls} svg-box">${vehicleSVG(item.value)}</div>`;
     if (item.kind === 'body') return `<div class="${cls} svg-box body-box">${bodySVG(item.value)}</div>`;
     return `<div class="${cls}"><div class="emoji">${item.value}</div></div>`;
+  }
+
+  function shouldUseRasterAsset(item) {
+    return item && item.unitId !== 'u1' && ['icon', 'animal', 'vehicle', 'body'].includes(item.kind);
+  }
+
+  function assetPath(item) {
+    return `assets/cards/${item.unitId}/${item.id}.png`;
   }
 
   function premiumSticker(inner, opts = {}) {
