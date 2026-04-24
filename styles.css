@@ -319,3 +319,372 @@ button { border: 0; cursor: pointer; }
 .choice:hover,.match-card:hover,.mode-card:hover,.study-card:hover,.unit-button:hover{transform:translateY(-2px)}
 .choice,.match-card,.mode-card,.study-card,.unit-button{transition:transform .16s ease, box-shadow .16s ease}
 .audio-pill{background:linear-gradient(180deg,#eef2ff,#e0e7ff)}
+
+/* Premium product pass */
+:root {
+  --bg: #f4f7fb;
+  --card: rgba(255,255,255,.96);
+  --text: #172033;
+  --muted: #627089;
+  --border: #dce6f3;
+  --shadow: 0 20px 50px rgba(28,44,76,.13);
+  --shadow-sm: 0 10px 24px rgba(28,44,76,.09);
+}
+
+html, body {
+  font-family: "Nunito Sans", "Trebuchet MS", sans-serif;
+}
+
+body {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.9), rgba(244,248,253,.72)),
+    repeating-linear-gradient(90deg, rgba(26,42,75,.035) 0 1px, transparent 1px 88px),
+    repeating-linear-gradient(0deg, rgba(26,42,75,.025) 0 1px, transparent 1px 88px),
+    #f4f7fb;
+}
+
+.shell {
+  background: rgba(255,255,255,.64);
+  border-color: rgba(255,255,255,.92);
+  box-shadow: 0 28px 80px rgba(23,32,51,.14);
+}
+
+.topbar {
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(18px);
+}
+
+.robot-icon,
+.button.primary,
+.unit-button.active {
+  background: linear-gradient(135deg, var(--accent), #22c1c3);
+}
+
+.card,
+.hero,
+.stat,
+.mode-card,
+.study-card,
+.setting-card,
+.choice,
+.match-card,
+.audio-card {
+  border-color: rgba(213,225,241,.95);
+  box-shadow: 0 14px 34px rgba(28,44,76,.08);
+}
+
+.hero {
+  min-height: 360px;
+}
+
+.hero-bg {
+  filter: saturate(.88) brightness(1.04);
+}
+
+.hero-inner {
+  gap: 22px;
+}
+
+.hero h2,
+.card h2,
+.mascot h3 {
+  letter-spacing: 0;
+}
+
+.button,
+.toggle-chip,
+.nav-button,
+.choice,
+.match-card,
+.audio-card,
+.unit-button {
+  min-height: 48px;
+}
+
+.button {
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(28,44,76,.08);
+}
+
+.button.primary {
+  box-shadow: 0 14px 24px rgba(34,193,195,.2);
+}
+
+.button.secondary,
+.button.soft {
+  background: rgba(255,255,255,.96);
+}
+
+.mode-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mode-card,
+.study-card,
+.choice,
+.match-card {
+  border-radius: 18px;
+}
+
+.stage {
+  background: #fff;
+  border-color: rgba(213,225,241,.95);
+  overflow: visible;
+}
+
+.stage::after {
+  display: none;
+}
+
+.visual {
+  border-radius: 22px;
+  box-shadow: 0 14px 30px rgba(28,44,76,.08);
+}
+
+.listener-stage .ear {
+  background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(236,246,255,.96));
+  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,.78), var(--shadow-sm);
+}
+
+.choice-grid {
+  align-items: stretch;
+}
+
+.choice,
+.match-card {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 8px;
+}
+
+.choice .name,
+.match-card .name {
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.feedback {
+  border-radius: 14px;
+  padding: 6px 10px;
+}
+
+.feedback.ok {
+  background: rgba(22,163,74,.08);
+}
+
+.feedback.bad {
+  background: rgba(239,68,68,.08);
+}
+
+@media (max-width: 920px) {
+  #app {
+    padding: 0;
+  }
+
+  .shell {
+    min-height: 100dvh;
+    border-radius: 0;
+    border: 0;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    min-height: 64px;
+  }
+
+  .dots {
+    display: none;
+  }
+
+  .titlebox h1 {
+    font-size: 16px;
+  }
+
+  .pill {
+    padding: 8px 11px;
+  }
+
+  .main {
+    padding: 12px 12px calc(92px + env(safe-area-inset-bottom));
+    gap: 12px;
+  }
+
+  .hero,
+  .card {
+    border-radius: 20px;
+    padding: 14px;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero h2 {
+    font-size: 38px;
+    line-height: 1;
+  }
+
+  .mascot {
+    min-height: 210px;
+    border-radius: 18px;
+  }
+
+  .mascot-bubble {
+    width: 118px;
+    height: 118px;
+    border-radius: 28px;
+    font-size: 68px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .hero .actions,
+  .header-row > .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .button {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+  }
+
+  .grid-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mode-grid,
+  .study-grid,
+  .settings-grid,
+  .match-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-grid {
+    gap: 12px;
+  }
+
+  .stage {
+    min-height: 250px;
+    border-radius: 20px;
+  }
+
+  .choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .choice,
+  .match-card {
+    min-height: 176px;
+    padding: 10px 8px;
+  }
+
+  .visual.small {
+    width: min(100%, 118px);
+  }
+
+  .audio-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .audio-card {
+    min-height: 58px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .audio-pill {
+    width: 100%;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    display: grid;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 -16px 34px rgba(28,44,76,.12);
+  }
+
+  .nav-button {
+    min-height: 56px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 430px) {
+  .topbar {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .robot-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 19px;
+  }
+
+  .titlebox p {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .grid-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat,
+  .mode-card,
+  .study-card,
+  .setting-card {
+    padding: 12px;
+  }
+
+  .choice,
+  .match-card {
+    min-height: 158px;
+  }
+
+  .choice .name,
+  .match-card .name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .choice-grid,
+  .audio-list,
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .choice,
+  .match-card {
+    min-height: 146px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}

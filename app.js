@@ -4,6 +4,7 @@
   const app = document.getElementById('app');
   let toastTimer = null;
   let burstTimer = null;
+  const speechState = { token: 0, voices: [], keepAliveTimer: null };
 
   const state = loadState();
   warmVoices();
@@ -42,7 +43,7 @@
       showSpanish: true,
       showEnglish: false,
       autoPrompt: true,
-      speechRate: 0.72,
+      speechRate: 0.62,
       sessionMinutes: 10,
       progress: baseProgress(),
       toast: null,
@@ -57,6 +58,7 @@
       const next = { ...defaultState(), ...raw };
       next.progress = { ...baseProgress(), ...(raw.progress || {}) };
       if (!Array.isArray(next.selectedUnitIds) || next.selectedUnitIds.length === 0) next.selectedUnitIds = ['u1'];
+      next.speechRate = clampSpeechRate(next.speechRate);
       return next;
     } catch {
       return defaultState();
@@ -438,7 +440,7 @@
           <article class="setting-card">
             <h3 style="margin:0 0 8px">Audio and progress</h3>
             <div class="toggle-row"><span>Auto-speak prompts</span><button class="button ${state.autoPrompt ? 'primary' : 'secondary'}" data-action="toggle-auto-prompt">${state.autoPrompt ? 'On' : 'Off'}</button></div>
-            <div class="toggle-row"><span>Speech speed</span><select class="select" id="speechRate"><option value="0.62" ${state.speechRate === 0.62 ? 'selected' : ''}>Very slow</option><option value="0.72" ${state.speechRate === 0.72 ? 'selected' : ''}>Slow</option><option value="0.82" ${state.speechRate === 0.82 ? 'selected' : ''}>Normal</option></select></div>
+            <div class="toggle-row"><span>Speech speed</span><select class="select" id="speechRate"><option value="0.56" ${state.speechRate === 0.56 ? 'selected' : ''}>Gentle</option><option value="0.62" ${state.speechRate === 0.62 ? 'selected' : ''}>Clear</option><option value="0.7" ${state.speechRate === 0.7 ? 'selected' : ''}>Lively</option></select></div>
             <div class="toggle-row"><span>Reset saved progress</span><button class="button warn" data-action="reset-progress">Reset</button></div>
           </article>
         </div>
@@ -496,16 +498,18 @@
     if (sessionMinutes) sessionMinutes.onchange = (event) => { state.sessionMinutes = Number(event.target.value); toast('Session updated', `${state.sessionMinutes} minute sessions selected.`); render(); };
 
     const speechRate = document.getElementById('speechRate');
-    if (speechRate) speechRate.onchange = (event) => { state.speechRate = Number(event.target.value); toast('Speech speed updated', 'New audio speed saved.'); render(); };
+    if (speechRate) speechRate.onchange = (event) => { state.speechRate = clampSpeechRate(event.target.value); toast('Speech speed updated', 'New audio speed saved.'); render(); };
   }
 
   function navigate(key) {
     if (key === 'home') {
+      stopSpeech();
       state.screen = 'home';
       render();
       return;
     }
     if (key === 'settings') {
+      stopSpeech();
       state.screen = 'settings';
       render();
       return;
@@ -515,6 +519,7 @@
 
   function handleAction(action) {
     if (action === 'go-home') {
+      stopSpeech();
       state.screen = 'home';
       clearFeedback();
       render();
@@ -653,13 +658,16 @@
       state.feedback = { type: 'ok', text: state.showSpanish ? '¡Muy bien!' : 'Great job!' };
       progressFor(current.unitId).stars += 1;
       reward();
-      speak(`Great job. ${current.label}.`, Math.max(state.speechRate, 0.78));
       render();
-      setTimeout(nextListenRound, 760);
+      speak(`Great job. ${current.label}.`, Math.max(state.speechRate, 0.62)).then((active) => {
+        if (active && state.screen === 'activity' && state.mode === 'listen') {
+          setTimeout(nextListenRound, 220);
+        }
+      });
     } else {
       state.feedback = { type: 'bad', text: state.showSpanish ? 'Intenta de nuevo' : 'Try again' };
       render();
-      speak(`Try again. ${current.label}.`, Math.max(state.speechRate, 0.78));
+      speak(`Try again. Listen carefully. ${current.label}.`, Math.max(state.speechRate, 0.62));
     }
   }
 
@@ -707,7 +715,7 @@
       reward();
       state.selectedAudioId = null;
       render();
-      speak('Perfect match.', Math.max(state.speechRate, 0.78));
+      speak('Perfect match.', Math.max(state.speechRate, 0.62));
       if (state.solvedIds.length >= state.matchLeft.length) {
         const badge = DATA.badges[(state.solvedIds.length + totalStars()) % DATA.badges.length];
         state.selectedUnitIds.forEach((id) => { state.progress[id].badge = badge; });
@@ -720,7 +728,7 @@
     } else {
       state.feedback = { type: 'bad', text: state.showSpanish ? 'No coincide' : 'Not a match' };
       render();
-      speak('Not a match. Try again.', Math.max(state.speechRate, 0.78));
+      speak('Not a match. Try again.', Math.max(state.speechRate, 0.62));
     }
   }
 
@@ -1388,22 +1396,106 @@
   }
 
   function speak(text, rate = state.speechRate) {
-    if (!('speechSynthesis' in window) || !text) return;
+    if (!('speechSynthesis' in window) || !text) return Promise.resolve(false);
+    const token = ++speechState.token;
+    stopSpeech(false);
+    const chunks = speechChunks(text);
+    let chain = Promise.resolve(true);
+    chunks.forEach((chunk, index) => {
+      chain = chain
+        .then((active) => {
+          if (!active || token !== speechState.token) return false;
+          return speakChunk(chunk, clampSpeechRate(rate), token);
+        })
+        .then((active) => {
+          if (!active || index === chunks.length - 1) return active;
+          return wait(130).then(() => token === speechState.token);
+        });
+    });
+    return chain.finally(clearSpeechKeepAlive);
+  }
+
+  function speakChunk(text, rate, token) {
+    return new Promise((resolve) => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = rate;
+      utterance.pitch = 1.02;
+      const voice = preferredVoice();
+      if (voice) utterance.voice = voice;
+      utterance.onend = () => resolve(token === speechState.token);
+      utterance.onerror = () => resolve(false);
+      startSpeechKeepAlive(token);
+      window.speechSynthesis.speak(utterance);
+      window.speechSynthesis.resume();
+    });
+  }
+
+  function stopSpeech(invalidate = true) {
+    if (!('speechSynthesis' in window)) return;
+    if (invalidate) speechState.token += 1;
+    clearSpeechKeepAlive();
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = rate;
-    utterance.pitch = 1.04;
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find((row) => /^en(-|_)/i.test(row.lang));
-    if (voice) utterance.voice = voice;
-    window.speechSynthesis.speak(utterance);
+  }
+
+  function speechChunks(text) {
+    const normalized = String(text).replace(/\s+/g, ' ').trim();
+    if (normalized.length <= 72) return [normalized];
+    const pieces = normalized.match(/[^.!?]+[.!?]?/g) || [normalized];
+    const chunks = [];
+    let current = '';
+    pieces.forEach((piece) => {
+      const next = `${current} ${piece}`.trim();
+      if (next.length > 72 && current) {
+        chunks.push(current);
+        current = piece.trim();
+      } else {
+        current = next;
+      }
+    });
+    if (current) chunks.push(current);
+    return chunks;
+  }
+
+  function preferredVoice() {
+    const voices = speechState.voices.length ? speechState.voices : window.speechSynthesis.getVoices();
+    return voices.find((voice) => /en-US/i.test(voice.lang) && /aria|jenny|samantha|google/i.test(voice.name)) ||
+      voices.find((voice) => /en-US/i.test(voice.lang)) ||
+      voices.find((voice) => /^en/i.test(voice.lang));
+  }
+
+  function clampSpeechRate(value) {
+    const rate = Number(value);
+    if (!Number.isFinite(rate)) return 0.62;
+    return Math.min(0.7, Math.max(0.52, rate));
+  }
+
+  function startSpeechKeepAlive(token) {
+    clearSpeechKeepAlive();
+    speechState.keepAliveTimer = setInterval(() => {
+      if (token !== speechState.token || !window.speechSynthesis.speaking) {
+        clearSpeechKeepAlive();
+        return;
+      }
+      window.speechSynthesis.resume();
+    }, 4000);
+  }
+
+  function clearSpeechKeepAlive() {
+    if (speechState.keepAliveTimer) clearInterval(speechState.keepAliveTimer);
+    speechState.keepAliveTimer = null;
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   function warmVoices() {
     if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.getVoices();
-    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    speechState.voices = window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => {
+      speechState.voices = window.speechSynthesis.getVoices();
+    };
   }
 
   function shuffle(list) {
