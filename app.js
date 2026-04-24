@@ -1,6 +1,6 @@
 (() => {
   const DATA = window.CALIBOTS_CONTENT;
-  const STORE_KEY = 'calibots2-home-studio-v6';
+  const STORE_KEY = 'calibots2-home-studio-v9';
   const app = document.getElementById('app');
   let toastTimer = null;
   let burstTimer = null;
@@ -11,7 +11,15 @@
   render();
 
   if ('serviceWorker' in navigator && /^https?:$/i.test(location.protocol)) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+    navigator.serviceWorker.register('./sw.js?v=9').then((registration) => {
+      registration.update().catch(() => {});
+    }).catch(() => {});
   }
 
   function baseProgress() {

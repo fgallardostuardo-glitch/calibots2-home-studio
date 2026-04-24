@@ -1,10 +1,10 @@
-const CACHE = 'calibots2-home-studio-v8';
+const CACHE = 'calibots2-home-studio-v9';
 const CORE_ASSETS = [
   './',
   './index.html',
-  './styles.css',
-  './content.js',
-  './app.js',
+  './styles.css?v=9',
+  './content.js?v=9',
+  './app.js?v=9',
   './manifest.webmanifest',
   './assets/favicon.svg'
 ];
@@ -30,8 +30,12 @@ self.addEventListener('fetch', (event) => {
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
 
+  const normalizedRequest = requestUrl.pathname.endsWith('/')
+    ? new Request('./index.html', { cache: 'reload' })
+    : event.request;
+
   event.respondWith(
-    fetch(event.request)
+    fetch(normalizedRequest)
       .then((response) => {
         const copy = response.clone();
         caches.open(CACHE).then((cache) => cache.put(event.request, copy));
